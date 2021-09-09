@@ -1,0 +1,52 @@
+H = 20;
+ci = 3;
+Lr = ci./f;
+gp = 9.8*3/1025;
+
+w = Mx./(1025*Lr);
+w = w*24*60*60;
+
+idV = fecha(:,2)==1 | fecha(:,2)==2 | fecha(:,2)==3;
+idO = fecha(:,2)==4 | fecha(:,2)==5 | fecha(:,2)==6;
+idI = fecha(:,2)==7 | fecha(:,2)==8 | fecha(:,2)==9;
+idP = fecha(:,2)==10 | fecha(:,2)==11 | fecha(:,2)==12;
+wid = [1,1,1];
+lat = [37,30,21];
+for i1=1:3
+    figure()
+    set(gcf,'position',[10,10,800,800])
+    aa = num2str(lat(i1));
+    suptitle(['Velocidad vertical [%] ' aa ' °S'])
+    
+    subplot 221
+    histogram(w(idV,i1),'Normalization','probability','BinWidth',wid(i1))
+    title('Verano','fontsize',14)
+    xlabel('[m/dia]','FontSize',14)
+    yticklabels(yticks*100)
+    axis tight
+    xlim([-5 10])
+    
+    subplot 222
+    histogram(w(idO,i1),'Normalization','probability','BinWidth',wid(i1))
+    title('Otoño','fontsize',14)
+    xlabel('[m/dia]','FontSize',14)
+    yticklabels(yticks*100)
+    axis tight
+    xlim([-5 10])
+    
+    subplot 223
+    histogram(w(idI,i1),'Normalization','probability','BinWidth',wid(i1))
+    title('Invierno','fontsize',14)
+    xlabel('[m/dia]','FontSize',14)
+    yticklabels(yticks*100)
+    axis tight
+    xlim([-5 10])
+    
+    subplot 224
+    histogram(w(idP,i1),'Normalization','probability','BinWidth',wid(i1))
+    title('Primavera','fontsize',14)
+    xlabel('[m/dia]','FontSize',14)
+    yticklabels(yticks*100)
+    axis tight
+    xlim([-5 10])
+end

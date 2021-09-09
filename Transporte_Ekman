@@ -1,0 +1,20 @@
+close all; clear all;
+load 'nombre_de_la_base_de_datos.mat'
+mod = sqrt(Ui.^2+Vi.^2); % WW
+Ang = atan2(Vi,Ui)*180/pi;
+clear Ui Vi
+Ui = mod.*cosd(Ang + [10 21 -14]);
+Vi = mod.*sind(Ang + [10 21 -14]);
+
+T_x = 1.2*1.3e-3*sqrt(Ui.^2+Vi.^2).*Ui;
+T_y = 1.2*1.3e-3*sqrt(Ui.^2+Vi.^2).*Vi;
+f = 2*7.29e-5*sind([-37 -30 -21]);
+Mx = T_y./(f);  % Transporte horizontal
+
+tt = datetime(fecha(:,1),fecha(:,2),fecha(:,3));
+
+figure()
+plot(tt,-Mx(:,1));
+title('Transporte de agua por viento [Kg s-1m-1]')
+xlabel('Fechas')
+ylabel('Transporte de Ekman [m^2/s]')
